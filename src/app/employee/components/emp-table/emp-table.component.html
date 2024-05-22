@@ -1,0 +1,89 @@
+<!-- <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput formControlName="filterValue" (ngModelChange)="applyFilter()" placeholder="Filter">
+  </mat-form-field> -->
+  <div class="buttons">
+  <button mat-raised-button  (click)="openAddEmpDialog()" id="add" class="button">
+    <mat-icon>group_add</mat-icon> new employee
+  </button>
+
+
+  <button mat-raised-button color="primary" (click)="downloadExcel()"  class="button">
+    <mat-icon>cloud_download</mat-icon> Excel
+  </button>
+</div>
+
+<form [formGroup]="filterForm">
+  <mat-form-field>
+
+    <mat-label>Filter</mat-label> 
+    <input matInput formControlName="filterValue" (input)="applyFilter()" placeholder="">
+    <mat-icon>search</mat-icon>
+  </mat-form-field>
+</form>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container> -->
+
+    <!-- First Name Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
+    </ng-container>
+
+    <!-- Last Name Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.lastName}} </td>
+    </ng-container>
+
+    <!--num id card Column -->
+    <ng-container matColumnDef="Identity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> identity </th>
+      <td mat-cell *matCellDef="let row"> {{row.identity}} </td>
+    </ng-container>
+
+    <!-- Start Date Column -->
+    <ng-container matColumnDef="startDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+      <td mat-cell *matCellDef="let row"> {{row.startDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete" class="icon">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="deleteEmpDetails(row.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef class="icon"></th>
+      <td mat-cell *matCellDef="let row" class="icon">
+        <button mat-icon-button (click)="openEditEmpDialog(row)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="icon"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="icon"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{filterForm.value.filterValue}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of employees"></mat-paginator>
+</div>
+
+
+

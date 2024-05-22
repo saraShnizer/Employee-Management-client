@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Add Role</h2>
+<mat-dialog-content>
+    <form [formGroup]="newEmpRoleForm" class="example-form" (ngSubmit)="addEmpRole()">
+        <mat-form-field>
+            <mat-label>name</mat-label>
+            <input type="text" matInput formControlName="name" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let role of roles" [value]="role.name" [disabled]="selectedRoles.includes(role.name)">
+                  {{ role.name }}
+                </mat-option>
+              </mat-autocomplete>
+              
+          </mat-form-field>
+
+        <mat-form-field class="example-form-field">
+            <mat-label>start date</mat-label>
+            <input matInput [matDatepicker]="datepicker" formControlName="startDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+                <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancel</button>
+                    <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                </mat-datepicker-actions>
+            </mat-datepicker>
+        </mat-form-field>
+        <mat-slide-toggle formControlName="isAdmin" (change)="toggleAdmin($event.checked)">admin</mat-slide-toggle>
+        <mat-dialog-actions>
+            <button mat-button (click)="onNoClick()" >cancel</button>
+            
+            <button mat-raised-button type="submit" [mat-dialog-close]="data" [disabled]="newEmpRoleForm.invalid"  cdkFocusInitial>save</button>
+           
+        </mat-dialog-actions>
+    </form>
+
+</mat-dialog-content>
