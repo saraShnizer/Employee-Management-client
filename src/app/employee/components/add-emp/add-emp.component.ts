@@ -13,6 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogRef } from '@angular/material/dialog';
+
 
 import { EmployeeRolePost } from '../../employeeRolePost.model';
 import { Employee } from '../../employee.model';
@@ -70,7 +72,7 @@ export class AddEmpComponent implements OnInit {
   isSaveClicked: boolean = false;
   currentEmpId!: number;
 
-  constructor(private formBuilder: FormBuilder, private dialog: MatDialog, private employeesService: EmployeesService) { }
+  constructor(private dialogRef: MatDialogRef<AddEmpComponent>, private formBuilder: FormBuilder, private dialog: MatDialog, private employeesService: EmployeesService) { }
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
   }
@@ -126,8 +128,8 @@ export class AddEmpComponent implements OnInit {
           this.currentEmpId = response.id;
           console.log("currentEmpId", this.currentEmpId);
           console.log(response);
-          this.dialog.closeAll();
-
+          // שלח את העובד החדש חזרה לקומפוננטת הטבלה
+          this.dialogRef.close(response);
         },
         error: (err) => {
           console.log(err);

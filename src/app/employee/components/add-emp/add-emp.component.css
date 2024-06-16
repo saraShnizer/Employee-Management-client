@@ -1,39 +1,19 @@
+.example-form {
 
-.example-form  {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .example-list-wrapping {
-    max-width: 500px;
-  }
+  margin: 0 auto;
+  margin-top: 4%;
+}
 
-  .example-form {
-    width: 400px;
-    margin: 0 auto;
-  }
-  
-  .form-row {
-    display: flex;
-    margin-bottom: 15px;
-  }
-  
-  .form-group {
-    width: 100%;
-  }
-  
-  .mat-form-field {
-    width: 100%;
-  }
-  
-  .mat-list-item {
-    display: flex;
-    align-items: center;
-  }
-  
-  button {
-    margin-left: 10px;
-  }
+.form-row {
+  display: flex;
+  justify-content: space-between; /* יישור הפריטים לכל אחד מהשונים שנבחרו */
+  margin-bottom: 15px;
+}
+
+.form-group {
+  width: 50%; /* חלוקה אחידה של הפריטים בשורה */
+  margin-right: 10px; /* מרווח בין הפריטים */
+}
+.aaaa{
+  /* background: linear-gradient(to right, #0022ff, #ff7f23,  #4d68ff7c) */
+}

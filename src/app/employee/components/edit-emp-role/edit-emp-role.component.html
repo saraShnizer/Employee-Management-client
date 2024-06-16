@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Edit Role</h2>
+
+<mat-dialog-content [formGroup]="editRoleForm">
+  <mat-form-field class="form-group">
+    <mat-label>start date</mat-label>
+    <input matInput [matDatepicker]="datepicker2" formControlName="startDate">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="datepicker2"></mat-datepicker-toggle>
+    <mat-datepicker #datepicker2>
+      <mat-datepicker-actions>
+        <button mat-button matDatepickerCancel>Cancel</button>
+        <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+      </mat-datepicker-actions>
+    </mat-datepicker>
+  </mat-form-field>   
+
+  <mat-slide-toggle formControlName="isAdmin" (change)="toggleAdmin($event.checked)">
+    Admin
+  </mat-slide-toggle>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button (click)="onSave()" [disabled]="!editRoleForm.valid">Save</button>
+</mat-dialog-actions>

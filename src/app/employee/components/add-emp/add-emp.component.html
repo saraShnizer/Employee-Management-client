@@ -1,89 +1,79 @@
 <h2 mat-dialog-title>Add Employee</h2>
-<mat-dialog-content>
-<form [formGroup]="newEmpForm" class="example-form" >
-  <div *ngIf="!isSaveClicked">
+<mat-dialog-content class="aaaa">
+  <form [formGroup]="newEmpForm" class="example-form">
+    <div *ngIf="!isSaveClicked">
 
-  <mat-form-field class="form-group">
-    <mat-label>first name</mat-label>
-    <input matInput formControlName="firstName">
-  </mat-form-field>
+      <div class="form-row">
+        <mat-form-field class="form-group">
+          <mat-label>first name</mat-label>
+          <input matInput formControlName="firstName">
+        </mat-form-field>
 
-  <mat-form-field class="form-group">
-    <mat-label>last name</mat-label>
-    <input matInput formControlName="lastName">
-  </mat-form-field>
-
-  <mat-form-field class="form-group">
-    <mat-label>identity</mat-label>
-    <input matInput formControlName="identity">
-    <mat-error *ngIf="newEmpForm.get('identity')?.hasError('pattern')">
-      identity must contain exactly 9 digits.
-    </mat-error>
-  </mat-form-field>
-
-
-  <mat-form-field class="form-group">
-    <mat-label>birthdate</mat-label>
-    <input matInput [matDatepicker]="datepicker" formControlName="birthDate">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
-    <mat-datepicker #datepicker>
-      <mat-datepicker-actions>
-        <button mat-button matDatepickerCancel>Cancel</button>
-        <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
-      </mat-datepicker-actions>
-    </mat-datepicker>
-  </mat-form-field>
-
-
-
-  <mat-form-field class="form-group">
-    <mat-label>start date</mat-label>
-    <input matInput [matDatepicker]="datepicker2" formControlName="startDate">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="datepicker2"></mat-datepicker-toggle>
-    <mat-datepicker #datepicker2>
-      <mat-datepicker-actions>
-        <button mat-button matDatepickerCancel>Cancel</button>
-        <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
-      </mat-datepicker-actions>
-    </mat-datepicker>
-  </mat-form-field>
-
-  <mat-form-field class="form-group">
-    <mat-label>gender</mat-label>
-    <mat-select formControlName="gender">
-      <mat-option value="Male">Male</mat-option>
-      <mat-option value="Female">Female</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-<button mat-raised-button color="primary" type="submit" (click)="addEmployee()" [disabled]="newEmpForm.invalid" cdkFocusInitial>save</button>
-</div> 
-
-
-<div *ngIf="isSaveClicked">
-    <mat-label>roles</mat-label>
-    <mat-list>
-      <div *ngIf="empRoles">
-        <div *ngFor="let empRole of empRoles.controls; let i = index">
-          <mat-list-item>
-            <span matListItemTitle>{{empRole.value.role.name}}</span>
-            <span matListItemLine>{{empRole.value.startDate.toLocaleDateString()}}</span>
-            <button mat-icon-button (click)="deleteRole(i)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </mat-list-item>
-
-        </div>
+        <mat-form-field class="form-group">
+          <mat-label>last name</mat-label>
+          <input matInput formControlName="lastName">
+        </mat-form-field>
       </div>
-    </mat-list>
-    <br>
-    <mat-dialog-actions>
-    <button mat-icon-button (click)="openAddRoleDialog()"><mat-icon>add</mat-icon></button>
-    </mat-dialog-actions>
-  </div>
- 
- 
-</form>
+
+      <div class="form-row">
+        <mat-form-field class="form-group">
+          <mat-label>identity</mat-label>
+          <input matInput formControlName="identity">
+          <mat-error *ngIf="newEmpForm.get('identity')?.hasError('pattern')">
+            identity must contain exactly 9 digits.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+          <mat-label>birthdate</mat-label>
+          <input matInput [matDatepicker]="datepicker" formControlName="birthDate">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field class="form-group">
+          <mat-label>start date</mat-label>
+          <input matInput [matDatepicker]="datepicker2" formControlName="startDate">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="datepicker2"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker2></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+          <mat-label>gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="Male">Male</mat-option>
+            <mat-option value="Female">Female</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button color="primary" type="submit" (click)="addEmployee()" [disabled]="newEmpForm.invalid" cdkFocusInitial>save</button>
+    </div>
+
+    <div *ngIf="isSaveClicked">
+      <mat-label>roles</mat-label>
+      <mat-list>
+        <div *ngIf="empRoles">
+          <div *ngFor="let empRole of empRoles.controls; let i = index">
+            <mat-list-item>
+              <span matListItemTitle>{{empRole.value.role.name}}</span>
+              <span matListItemLine>{{empRole.value.startDate.toLocaleDateString()}}</span>
+              <button mat-icon-button (click)="deleteRole(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-list-item>
+          </div>
+        </div>
+      </mat-list>
+      <br>
+      <mat-dialog-actions>
+        <button mat-icon-button (click)="openAddRoleDialog()"><mat-icon>add</mat-icon></button>
+      </mat-dialog-actions>
+    </div>
+
+  </form>
 </mat-dialog-content>

@@ -12,7 +12,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import * as XLSX from 'xlsx';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 // import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -128,7 +128,9 @@ export class EmpTableComponent implements OnInit {
   }
   openEditEmpDialog(employee: Employee) {
     const dialogRef = this.dialog.open(EditEmpComponent, {
-      data: employee
+      
+      data: employee,
+      width:'50%'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -151,12 +153,19 @@ export class EmpTableComponent implements OnInit {
 
 
   }
+
   openAddEmpDialog() {
-    const dialogRef = this.dialog.open(AddEmpComponent, {
-    });
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '60%'; // הגדרת רוחב ה-dialog ל-60% מהמסך
+    dialogConfig.maxWidth = '800px'; // אם תרצה להגביל את הרוחב המקסימלי, ניתן להשתמש ב-maxWidth
+  
+    const dialogRef = this.dialog.open(AddEmpComponent, dialogConfig);
+  
 
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log("result", result);  
+      this.openEditEmpDialog(result);
       this.getEmployees();
     });
   }
